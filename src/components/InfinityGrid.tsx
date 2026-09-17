@@ -1,11 +1,10 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/lib/store";
 import { useWorkspace } from "@/lib/layout-context";
 import { AppGlyph } from "@/components/AppGlyph";
-import { btn } from "@/components/ui/button-variants";
-import { ExternalLink, FolderOpen, Star } from "lucide-react";
-import type { WorkApp, OrgGroup, InfinitySettings } from "@/lib/types";
+import { Star } from "lucide-react";
+import type { WorkApp, InfinitySettings } from "@/lib/types";
 import {
   DndContext,
   closestCenter,
@@ -34,9 +33,9 @@ const BUILTIN_WALLPAPERS = [
 
 /** 图标大小映射 */
 const ICON_SIZES: Record<InfinitySettings["iconSize"], { container: string; glyph: "sm" | "md" | "lg"; label: string }> = {
-  sm: { container: "h-12 w-12", glyph: "sm", label: "小" },
-  md: { container: "h-16 w-16", glyph: "md", label: "中" },
-  lg: { container: "h-20 w-20", glyph: "lg", label: "大" },
+  sm: { container: "h-14 w-14", glyph: "sm", label: "小" },
+  md: { container: "h-18 w-18", glyph: "md", label: "中" },
+  lg: { container: "h-22 w-22", glyph: "lg", label: "大" },
 };
 
 /** 单个可拖拽的图标 */
@@ -70,14 +69,14 @@ function InfinityIcon({
       style={style}
       {...attributes}
       {...listeners}
-      className="infinity-icon group flex flex-col items-center gap-1.5"
+      className="infinity-icon group flex flex-col items-center gap-2"
     >
       <div
         className={cn(
           "relative flex items-center justify-center transition-all duration-200",
           sizeConfig.container,
-          "bg-card/80 backdrop-blur-sm border border-white/20 shadow-lg",
-          "hover:scale-110 hover:shadow-xl hover:border-white/40",
+          "bg-white/15 backdrop-blur-sm border border-white/25 shadow-lg",
+          "hover:scale-110 hover:shadow-xl hover:border-white/50 hover:bg-white/25",
           "cursor-pointer",
         )}
         style={{ borderRadius: `${radius}%` }}
@@ -99,114 +98,34 @@ function InfinityIcon({
 
         {/* 状态指示器 */}
         {app.status === "maintenance" && (
-          <div className="absolute bottom-0.5 right-0.5 h-2 w-2 rounded-full bg-yellow-400" />
+          <div className="absolute bottom-1 right-1 h-2.5 w-2.5 rounded-full bg-yellow-400 border border-black/20" />
         )}
         {app.status === "offline" && (
-          <div className="absolute bottom-0.5 right-0.5 h-2 w-2 rounded-full bg-red-400" />
+          <div className="absolute bottom-1 right-1 h-2.5 w-2.5 rounded-full bg-red-400 border border-black/20" />
         )}
       </div>
 
-      <span className="max-w-[80px] truncate text-center text-[11px] leading-tight text-white drop-shadow-md">
+      <span className="max-w-[100px] truncate text-center text-[12px] leading-tight text-white drop-shadow-lg font-medium">
         {app.name}
       </span>
     </div>
   );
 }
 
-/** 文件夹图标 */
-function FolderIcon({
-  group,
-  apps,
-  size,
-  radius,
-  onLaunch,
-  onToggleFavorite,
-}: {
-  group: OrgGroup;
-  apps: WorkApp[];
-  size: InfinitySettings["iconSize"];
-  radius: number;
-  onLaunch: (id: string) => void;
-  onToggleFavorite: (id: string) => void;
-}) {
-  const [open, setOpen] = useState(false);
-  const sizeConfig = ICON_SIZES[size];
-
-  return (
-    <>
-      <div
-        className={cn(
-          "infinity-icon group flex flex-col items-center gap-1.5",
-        )}
-      >
-        <div
-          className={cn(
-            "relative flex items-center justify-center transition-all duration-200 cursor-pointer",
-            sizeConfig.container,
-            "bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg",
-            "hover:scale-110 hover:shadow-xl hover:border-white/40",
-          )}
-          style={{ borderRadius: `${radius}%` }}
-          onClick={() => setOpen(true)}
-        >
-          <FolderOpen size={24} className="text-white/80" />
-          <span className="absolute -bottom-1 -right-1 rounded-full bg-white/20 px-1 text-[9px] text-white">
-            {apps.length}
-          </span>
-        </div>
-
-        <span className="max-w-[80px] truncate text-center text-[11px] leading-tight text-white drop-shadow-md">
-          {group.name}
-        </span>
-      </div>
-
-      {/* 文件夹展开弹窗 */}
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-xl border border-white/20 bg-card/95 p-4 shadow-2xl">
-            <div className="mb-3 flex items-center justify-between">
-              <h3 className="text-sm font-medium text-foreground">{group.name}</h3>
-              <button
-                onClick={() => setOpen(false)}
-                className="rounded-md p-1 text-muted-foreground hover:bg-surface"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="grid grid-cols-4 gap-3">
-              {apps.map((app) => (
-                <InfinityIcon
-                  key={app.id}
-                  app={app}
-                  size="sm"
-                  radius={radius}
-                  onLaunch={(id) => { onLaunch(id); setOpen(false); }}
-                  onToggleFavorite={onToggleFavorite}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
-
-/** Infinity 风格图标网格主页 */
+/** Infinity 风格图标网格主页 - 全铺展开 */
 export function InfinityGrid() {
-  const { apps, data, orgGroups, stats, toggleFavorite } = useStore();
-  const { launch } = useStore();
+  const { apps, data, orgGroups, toggleFavorite, launch } = useStore();
   const { openNew } = useWorkspace();
 
   const settings = data.infinitySettings ?? {
     iconSize: "md" as const,
     iconRadius: 20,
-    columns: 6,
+    columns: 8,
     wallpaperType: "builtin" as const,
     wallpaperIndex: 0,
     wallpaperUrl: "",
     wallpaperBlur: 0,
-    wallpaperOverlay: 30,
+    wallpaperOverlay: 20,
     showSearch: true,
   };
 
@@ -219,9 +138,15 @@ export function InfinityGrid() {
   const appMap = useMemo(() => new Map(apps.map((a) => [a.id, a])), [apps]);
   const favoriteApps = data.favorites.map((id) => appMap.get(id)).filter(Boolean) as WorkApp[];
 
-  // 获取公共分组（用于文件夹）
-  const publicGroups = orgGroups.filter((g) => g.kind === "group");
-  const deptGroups = orgGroups.filter((g) => g.kind === "dept");
+  // 按分组组织应用（全铺开，不折叠）
+  const groups = useMemo(() => {
+    return orgGroups
+      .sort((a, b) => a.order - b.order)
+      .map((group) => ({
+        ...group,
+        apps: apps.filter((a) => a.groupId === group.id),
+      }));
+  }, [orgGroups, apps]);
 
   // 壁纸 URL
   const wallpaperUrl = settings.wallpaperType === "custom" && settings.wallpaperUrl
@@ -233,48 +158,45 @@ export function InfinityGrid() {
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
-    // 这里可以添加拖拽排序逻辑
   }
 
   const gridCols: Record<number, string> = {
-    4: "grid-cols-4",
-    5: "grid-cols-5",
-    6: "grid-cols-6",
-    7: "grid-cols-7",
-    8: "grid-cols-8",
+    4: "grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10",
+    5: "grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10",
+    6: "grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12",
+    7: "grid-cols-7 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12",
+    8: "grid-cols-8 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-14",
   };
 
   return (
     <div
-      className="infinity-container relative min-h-screen overflow-hidden"
+      className="infinity-container relative min-h-screen w-full overflow-auto"
       style={{
-        background: wallpaperUrl ? `url(${wallpaperUrl}) center/cover no-repeat` : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        background: wallpaperUrl ? `url(${wallpaperUrl}) center/cover no-repeat fixed` : "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
       }}
     >
       {/* 壁纸遮罩 */}
-      {wallpaperUrl && settings.wallpaperOverlay > 0 && (
+      <div
+        className="fixed inset-0 bg-black pointer-events-none"
+        style={{ opacity: settings.wallpaperOverlay / 100 }}
+      />
+      {settings.wallpaperBlur > 0 && (
         <div
-          className="absolute inset-0 bg-black"
-          style={{ opacity: settings.wallpaperOverlay / 100 }}
-        />
-      )}
-      {wallpaperUrl && settings.wallpaperBlur > 0 && (
-        <div
-          className="absolute inset-0"
+          className="fixed inset-0 pointer-events-none"
           style={{ backdropFilter: `blur(${settings.wallpaperBlur}px)` }}
         />
       )}
 
       {/* 主内容区 */}
-      <div className="relative z-10 flex min-h-screen flex-col items-center px-4 py-12">
-        {/* 搜索框 */}
+      <div className="relative z-10 min-h-screen w-full p-6 md:p-10 lg:p-16">
+        {/* 搜索框 - 居中 */}
         {settings.showSearch && (
-          <div className="mb-8 w-full max-w-xl">
+          <div className="mx-auto mb-10 max-w-2xl">
             <div className="relative">
               <input
                 type="text"
                 placeholder="搜索应用..."
-                className="w-full rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm text-white placeholder-white/50 backdrop-blur-sm focus:border-white/40 focus:outline-none"
+                className="w-full rounded-full border border-white/20 bg-white/10 px-6 py-4 text-base text-white placeholder-white/50 backdrop-blur-md focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/20"
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     const query = (e.target as HTMLInputElement).value.toLowerCase();
@@ -283,18 +205,18 @@ export function InfinityGrid() {
                   }
                 }}
               />
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40">⌘K</span>
+              <span className="absolute right-5 top-1/2 -translate-y-1/2 rounded bg-white/20 px-2 py-1 text-xs text-white/60">⌘K</span>
             </div>
           </div>
         )}
 
         {/* 收藏图标区 */}
         {favoriteApps.length > 0 && (
-          <section className="mb-8 w-full max-w-4xl">
-            <h2 className="mb-3 text-xs font-medium uppercase tracking-wider text-white/60">常用</h2>
+          <section className="mb-10">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/70">⭐ 常用置顶</h2>
             <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
               <SortableContext items={favoriteApps.map((a) => a.id)} strategy={rectSortingStrategy}>
-                <div className={cn("grid gap-4", gridCols[settings.columns] ?? "grid-cols-6")}>
+                <div className={cn("grid gap-5", gridCols[settings.columns] ?? "grid-cols-8")}>
                   {favoriteApps.map((app) => (
                     <InfinityIcon
                       key={app.id}
@@ -311,56 +233,36 @@ export function InfinityGrid() {
           </section>
         )}
 
-        {/* 文件夹区 - 公共分组 */}
-        {publicGroups.length > 0 && (
-          <section className="mb-8 w-full max-w-4xl">
-            <h2 className="mb-3 text-xs font-medium uppercase tracking-wider text-white/60">分组</h2>
-            <div className={cn("grid gap-4", gridCols[settings.columns] ?? "grid-cols-6")}>
-              {publicGroups.map((group) => {
-                const groupApps = apps.filter((a) => a.groupId === group.id);
-                return (
-                  <FolderIcon
-                    key={group.id}
-                    group={group}
-                    apps={groupApps}
+        {/* 所有分组 - 全铺展开 */}
+        {groups.map((group) => (
+          <section key={group.id} className="mb-10">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/70">
+              {group.kind === "dept" ? "🏢" : "📁"} {group.name}
+              <span className="ml-2 text-white/40">({group.apps.length})</span>
+            </h2>
+            {group.apps.length > 0 ? (
+              <div className={cn("grid gap-5", gridCols[settings.columns] ?? "grid-cols-8")}>
+                {group.apps.map((app) => (
+                  <InfinityIcon
+                    key={app.id}
+                    app={app}
                     size={settings.iconSize}
                     radius={settings.iconRadius}
                     onLaunch={launch}
                     onToggleFavorite={toggleFavorite}
                   />
-                );
-              })}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-white/40">暂无应用</p>
+            )}
           </section>
-        )}
-
-        {/* 部门文件夹区 */}
-        {deptGroups.length > 0 && (
-          <section className="mb-8 w-full max-w-4xl">
-            <h2 className="mb-3 text-xs font-medium uppercase tracking-wider text-white/60">部门</h2>
-            <div className={cn("grid gap-4", gridCols[settings.columns] ?? "grid-cols-6")}>
-              {deptGroups.map((group) => {
-                const groupApps = apps.filter((a) => a.groupId === group.id);
-                return (
-                  <FolderIcon
-                    key={group.id}
-                    group={group}
-                    apps={groupApps}
-                    size={settings.iconSize}
-                    radius={settings.iconRadius}
-                    onLaunch={launch}
-                    onToggleFavorite={toggleFavorite}
-                  />
-                );
-              })}
-            </div>
-          </section>
-        )}
+        ))}
 
         {/* 添加按钮 */}
         <button
           onClick={() => openNew()}
-          className="fixed bottom-6 right-6 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-all hover:scale-110 hover:bg-white/30"
+          className="fixed bottom-8 right-8 flex h-14 w-14 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition-all hover:scale-110 hover:bg-white/30 shadow-lg"
         >
           <span className="text-2xl">+</span>
         </button>
