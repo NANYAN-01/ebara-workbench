@@ -12,9 +12,10 @@ export const Route = createFileRoute("/_layout/favorites")({ component: Favorite
 
 /** 常用置顶页：拖拽排序 + 一键取消 */
 function FavoritesPage() {
-  const { apps, reorderFavorites, toggleFavorite } = useStore();
+  const { apps, data, reorderFavorites, toggleFavorite } = useStore();
   const { openNew } = useWorkspace();
-  const favs = apps.filter((a) => a.favorite);
+  const appMap = new Map(apps.map((a) => [a.id, a]));
+  const favs = data.favorites.map((id) => appMap.get(id)).filter(Boolean) as typeof apps;
 
   return (
     <div className="space-y-8">

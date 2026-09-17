@@ -15,7 +15,7 @@ export const Route = createFileRoute("/_layout/")({
 
 /** 首页工作台：内联数字概览 → 全员高频 → 常用置顶 → 最近使用 → 按部门分节 */
 export function WorkspaceHome() {
-  const { apps, orgGroups, stats, reorderFavorites } = useStore();
+  const { apps, data, orgGroups, stats, reorderFavorites } = useStore();
   const { openNew } = useWorkspace();
   const [dismissed, setDismissed] = useState(() => localStorage.getItem("ebara-hint") === "1");
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
@@ -26,7 +26,8 @@ export function WorkspaceHome() {
   const today = new Date().toISOString().slice(0, 10);
   const todayHits = Object.values(stats.days).reduce((s, d) => s + (d[today] ?? 0), 0);
 
-  const favorites = apps.filter((a) => a.favorite);
+  const appMap = new Map(apps.map((a) => [a.id, a]));
+  const favorites = data.favorites.map((id) => appMap.get(id)).filter(Boolean) as typeof apps;
   const hotApps = orgGroups.find((g) => g.id === "g-platform");
   const platformApps = apps.filter((a) => a.groupId === hotApps?.id && !a.favorite);
 
