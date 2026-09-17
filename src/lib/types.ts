@@ -72,6 +72,31 @@ export interface UsageStat {
   days: Record<string, StatEntry>;
 }
 
+/** Infinity 风格设置 */
+export type IconSize = "sm" | "md" | "lg";
+export type WallpaperType = "none" | "builtin" | "custom";
+
+export interface InfinitySettings {
+  /** 图标大小 */
+  iconSize: IconSize;
+  /** 圆角弧度 (0-50) */
+  iconRadius: number;
+  /** 每行列数 */
+  columns: number;
+  /** 壁纸类型 */
+  wallpaperType: WallpaperType;
+  /** 内置壁纸索引 */
+  wallpaperIndex: number;
+  /** 自定义壁纸 URL */
+  wallpaperUrl: string;
+  /** 壁纸模糊度 (0-20) */
+  wallpaperBlur: number;
+  /** 壁纸遮罩浓度 (0-100) */
+  wallpaperOverlay: number;
+  /** 显示搜索框 */
+  showSearch: boolean;
+}
+
 export interface WorkspaceData {
   version: number;
   groups: OrgGroup[];
@@ -82,6 +107,8 @@ export interface WorkspaceData {
   recent: { id: string; at: number }[];
   /** appId -> 使用统计 */
   stats: Record<string, UsageStat>;
+  /** Infinity 风格设置 */
+  infinitySettings?: InfinitySettings;
 }
 
 export const APP_TYPE_LABEL: Record<AppType, string> = {

@@ -207,6 +207,9 @@ interface StoreValue {
   exportConfig: () => void;
   importConfig: (incoming: WorkspaceData, mode: "merge" | "replace") => void;
 
+  /* Infinity 设置 */
+  updateInfinitySettings: (settings: Partial<import("./types").InfinitySettings>) => void;
+
   groupById: (id: string) => OrgGroup | undefined;
   sectionName: (groupId: string, sectionId: string | null) => string;
 }
@@ -464,6 +467,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     toast.success(`已导入 ${incoming.apps.length} 个应用、${incoming.groups.length} 个分组`);
   }, []);
 
+  /* ---------- Infinity 设置 ---------- */
+  const updateInfinitySettings = useCallback<StoreValue["updateInfinitySettings"]>((settings) => {
+    setData((d) => ({
+      ...d,
+      infinitySettings: { ...d.infinitySettings, ...settings } as any,
+    }));
+    toast.success("Infinity 设置已保存");
+  }, []);
+
   /* ---------- 组装 value ---------- */
   const value = useMemo<StoreValue>(() => {
     const groupById = (id: string) => data.groups.find((g) => g.id === id);
@@ -489,13 +501,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       resetToSeed,
       exportConfig,
       importConfig,
+      updateInfinitySettings,
       groupById,
       sectionName: (groupId, sectionId) => {
         if (!sectionId) return groupById(groupId)?.name ?? "未分组";
         return groupById(groupId)?.sections.find((s) => s.id === sectionId)?.name ?? "未分组";
       },
     };
-  }, [data, stats, isFresh, theme, toggleTheme, upsertApp, addApp, updateApp, removeApp, toggleFavorite, reorderFavorites, launch, copyText, addSection, renameSection, removeSection, resetToSeed, exportConfig, importConfig]);
+  }, [data, stats, isFresh, theme, toggleTheme, upsertApp, addApp, updateApp, removeApp, toggleFavorite, reorderFavorites, launch, copyText, addSection, renameSection, removeSection, resetToSeed, exportConfig, importConfig, updateInfinitySettings]);
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
 }

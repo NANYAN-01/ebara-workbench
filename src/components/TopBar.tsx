@@ -7,6 +7,7 @@ import {
   ChevronDown,
   Download,
   FolderTree,
+  Grid3X3,
   Moon,
   Plus,
   RotateCcw,
@@ -198,6 +199,7 @@ export function TopBar() {
                       { icon: Upload, label: "导入配置", run: () => setImportOpen(true) },
                       { icon: Download, label: "导出配置", run: () => exportConfig() },
                       { icon: RotateCcw, label: "恢复默认清单", run: () => resetToSeed() },
+                      { icon: Grid3X3, label: "Infinity 视图", run: () => navigate({ to: "/infinity" }) },
                     ].map((it) => (
                       <button
                         key={it.label}

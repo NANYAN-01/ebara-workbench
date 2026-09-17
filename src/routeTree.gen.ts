@@ -13,6 +13,7 @@ import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayoutIndexRouteImport } from './routes/_layout.index'
 import { Route as LayoutAppsRouteImport } from './routes/_layout.apps'
 import { Route as LayoutFavoritesRouteImport } from './routes/_layout.favorites'
+import { Route as LayoutInfinityRouteImport } from './routes/_layout.infinity'
 import { Route as LayoutRecentRouteImport } from './routes/_layout.recent'
 import { Route as LayoutStatsRouteImport } from './routes/_layout.stats'
 import { Route as LayoutToolsRouteImport } from './routes/_layout.tools'
@@ -37,6 +38,11 @@ const LayoutAppsRoute = LayoutAppsRouteImport.update({
 const LayoutFavoritesRoute = LayoutFavoritesRouteImport.update({
   id: '/favorites',
   path: '/favorites',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutInfinityRoute = LayoutInfinityRouteImport.update({
+  id: '/infinity',
+  path: '/infinity',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutRecentRoute = LayoutRecentRouteImport.update({
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
   '/apps': typeof LayoutAppsRoute
   '/favorites': typeof LayoutFavoritesRoute
+  '/infinity': typeof LayoutInfinityRoute
   '/recent': typeof LayoutRecentRoute
   '/stats': typeof LayoutStatsRoute
   '/tools': typeof LayoutToolsRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/apps': typeof LayoutAppsRoute
   '/favorites': typeof LayoutFavoritesRoute
+  '/infinity': typeof LayoutInfinityRoute
   '/recent': typeof LayoutRecentRoute
   '/stats': typeof LayoutStatsRoute
   '/tools': typeof LayoutToolsRoute
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/_layout': typeof LayoutRouteWithChildren
   '/_layout/apps': typeof LayoutAppsRoute
   '/_layout/favorites': typeof LayoutFavoritesRoute
+  '/_layout/infinity': typeof LayoutInfinityRoute
   '/_layout/recent': typeof LayoutRecentRoute
   '/_layout/stats': typeof LayoutStatsRoute
   '/_layout/tools': typeof LayoutToolsRoute
@@ -112,6 +121,7 @@ export interface FileRouteTypes {
     | '/'
     | '/apps'
     | '/favorites'
+    | '/infinity'
     | '/recent'
     | '/stats'
     | '/tools'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
   to:
     | '/apps'
     | '/favorites'
+    | '/infinity'
     | '/recent'
     | '/stats'
     | '/tools'
@@ -134,6 +145,7 @@ export interface FileRouteTypes {
     | '/_layout'
     | '/_layout/apps'
     | '/_layout/favorites'
+    | '/_layout/infinity'
     | '/_layout/recent'
     | '/_layout/stats'
     | '/_layout/tools'
@@ -175,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/favorites'
       fullPath: '/favorites'
       preLoaderRoute: typeof LayoutFavoritesRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/infinity': {
+      id: '/_layout/infinity'
+      path: '/infinity'
+      fullPath: '/infinity'
+      preLoaderRoute: typeof LayoutInfinityRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/recent': {
@@ -236,6 +255,7 @@ const LayoutDeptDeptIdRouteWithChildren =
 interface LayoutRouteChildren {
   LayoutAppsRoute: typeof LayoutAppsRoute
   LayoutFavoritesRoute: typeof LayoutFavoritesRoute
+  LayoutInfinityRoute: typeof LayoutInfinityRoute
   LayoutRecentRoute: typeof LayoutRecentRoute
   LayoutStatsRoute: typeof LayoutStatsRoute
   LayoutToolsRoute: typeof LayoutToolsRoute
@@ -247,6 +267,7 @@ interface LayoutRouteChildren {
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutAppsRoute: LayoutAppsRoute,
   LayoutFavoritesRoute: LayoutFavoritesRoute,
+  LayoutInfinityRoute: LayoutInfinityRoute,
   LayoutRecentRoute: LayoutRecentRoute,
   LayoutStatsRoute: LayoutStatsRoute,
   LayoutToolsRoute: LayoutToolsRoute,
