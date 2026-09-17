@@ -1,0 +1,803 @@
+{
+  "version": 3,
+  "groups": [
+    {
+      "id": "dept-dev",
+      "name": "开发部",
+      "kind": "dept",
+      "order": 1,
+      "sections": [
+        {
+          "id": "sec-dev",
+          "name": "开发科"
+        }
+      ]
+    },
+    {
+      "id": "dept-prod",
+      "name": "产品研发部",
+      "kind": "dept",
+      "order": 2,
+      "sections": [
+        {
+          "id": "sec-prod1",
+          "name": "产品研发一科"
+        },
+        {
+          "id": "sec-prod2",
+          "name": "产品研发二科"
+        }
+      ]
+    },
+    {
+      "id": "dept-tech",
+      "name": "技术研发部",
+      "kind": "dept",
+      "order": 3,
+      "sections": [
+        {
+          "id": "sec-eng",
+          "name": "工程技术研发科"
+        },
+        {
+          "id": "sec-elec",
+          "name": "电气技术研发科"
+        }
+      ]
+    },
+    {
+      "id": "g-platform",
+      "name": "公司平台",
+      "kind": "group",
+      "desc": "全员每天都要打开的管理系统",
+      "order": 4,
+      "sections": []
+    },
+    {
+      "id": "g-ai",
+      "name": "AI 助手",
+      "kind": "group",
+      "desc": "写材料、读文档、查代码的对话工具",
+      "order": 5,
+      "sections": []
+    },
+    {
+      "id": "g-tools",
+      "name": "效率工具",
+      "kind": "group",
+      "desc": "PDF、图片、编码、时间戳等日常小工具站",
+      "order": 6,
+      "sections": []
+    },
+    {
+      "id": "g-docs",
+      "name": "文档与社区",
+      "kind": "group",
+      "desc": "手册、问答与知识库",
+      "order": 7,
+      "sections": []
+    }
+  ],
+  "apps": [
+    {
+      "id": "seed-001",
+      "name": "U9 管理系统",
+      "url": "http://192.168.1.6/erp/mvc/login/index?ReturnUrl=%2Ferp%2Fmvc%2Fmain%2Findex",
+      "groupId": "g-platform",
+      "sectionId": "",
+      "type": "platform",
+      "status": "active",
+      "desc": "用友 U9 ERP，生产/采购/库存/财务一体化",
+      "tags": [
+        "ERP",
+        "内网",
+        "高频"
+      ],
+      "glyph": "grape",
+      "intranet": true,
+      "enabled": true,
+      "host": "192.168.1.6",
+      "path": "/erp/mvc/login/index",
+      "createdAt": 1767225600000,
+      "updatedAt": 1789606551624
+    },
+    {
+      "id": "seed-002",
+      "name": "OA 办公系统",
+      "url": "http://192.168.1.18/",
+      "groupId": "g-platform",
+      "sectionId": "",
+      "type": "platform",
+      "status": "active",
+      "desc": "流程审批、公告通知、考勤请假",
+      "tags": [
+        "审批",
+        "内网",
+        "高频"
+      ],
+      "glyph": "grape",
+      "intranet": true,
+      "enabled": true,
+      "host": "192.168.1.18",
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-003",
+      "name": "企业微信邮箱",
+      "url": "https://exmail.qq.com/login",
+      "groupId": "g-platform",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "企业微信邮箱 Webmail",
+      "tags": [
+        "内网",
+        "示例"
+      ],
+      "glyph": "sky",
+      "intranet": false,
+      "enabled": true,
+      "host": "192.168.1.18",
+      "path": "/mail/",
+      "createdAt": 1767225600000,
+      "updatedAt": 1789606689640
+    },
+    {
+      "id": "seed-004",
+      "name": "豆包",
+      "url": "https://www.doubao.com/",
+      "groupId": "g-ai",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "字节跳动 AI 对话，适合文案与日常问答",
+      "tags": [
+        "AI",
+        "对话"
+      ],
+      "glyph": "grape",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000,
+      "favorite": true
+    },
+    {
+      "id": "seed-005",
+      "name": "通义千问",
+      "url": "https://www.qianwen.com/",
+      "groupId": "g-ai",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "阿里通义千问，长文本与代码能力较强",
+      "tags": [
+        "AI",
+        "对话",
+        "代码"
+      ],
+      "glyph": "sky",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1789606983472,
+      "favorite": true
+    },
+    {
+      "id": "seed-006",
+      "name": "Kimi",
+      "url": "https://kimi.moonshot.cn/",
+      "groupId": "g-ai",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "月之暗面，超长上下文、读文档好用",
+      "tags": [
+        "AI",
+        "长文档"
+      ],
+      "glyph": "mint",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000,
+      "favorite": false
+    },
+    {
+      "id": "seed-007",
+      "name": "DeepSeek",
+      "url": "https://chat.deepseek.com/",
+      "groupId": "g-ai",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "推理与编程能力强，免费额度充足",
+      "tags": [
+        "AI",
+        "代码",
+        "推理"
+      ],
+      "glyph": "peach",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000,
+      "favorite": true
+    },
+    {
+      "id": "seed-008",
+      "name": "智谱清言",
+      "url": "https://chatglm.cn/",
+      "groupId": "g-ai",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "GLM 系列，支持智能体与画图",
+      "tags": [
+        "AI",
+        "智能体"
+      ],
+      "glyph": "rose",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-009",
+      "name": "腾讯元宝",
+      "url": "https://yuanbao.tencent.com/",
+      "groupId": "g-ai",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "混元模型，微信公众号内容检索方便",
+      "tags": [
+        "AI"
+      ],
+      "glyph": "sea",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-010",
+      "name": "iLovePDF",
+      "url": "https://www.ilovepdf.com/zh-cn",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "PDF 合并 / 拆分 / 压缩 / 转 Word 全都有",
+      "tags": [
+        "PDF",
+        "转换"
+      ],
+      "glyph": "peach",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-011",
+      "name": "PDF24 Tools",
+      "url": "https://tools.pdf24.org/zh/",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "完全免费的 PDF 工具箱，无次数限制",
+      "tags": [
+        "PDF",
+        "免费"
+      ],
+      "glyph": "peach",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-012",
+      "name": "Smallpdf",
+      "url": "https://smallpdf.com/cn",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "界面简洁的 PDF 编辑与压缩",
+      "tags": [
+        "PDF"
+      ],
+      "glyph": "peach",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-013",
+      "name": "Convertio",
+      "url": "https://convertio.co/zh/",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "万能格式转换：文档 / 图片 / 音视频",
+      "tags": [
+        "转换",
+        "格式"
+      ],
+      "glyph": "sky",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-014",
+      "name": "TinyPNG",
+      "url": "https://tinypng.com/",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "PNG/JPG 有损压缩，批量拖拽",
+      "tags": [
+        "图片",
+        "压缩"
+      ],
+      "glyph": "mint",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-015",
+      "name": "Squoosh",
+      "url": "https://squoosh.app/",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "Google 出品的图片编码对比工具",
+      "tags": [
+        "图片"
+      ],
+      "glyph": "mint",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-016",
+      "name": "remove.bg",
+      "url": "https://www.remove.bg/zh",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "一键抠图去背景",
+      "tags": [
+        "图片",
+        "抠图"
+      ],
+      "glyph": "mint",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-017",
+      "name": "Iconify 图标库",
+      "url": "https://icon-sets.iconify.design/",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "20 万+ 开源图标统一检索下载",
+      "tags": [
+        "图标",
+        "前端"
+      ],
+      "glyph": "sky",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-018",
+      "name": "Excalidraw",
+      "url": "https://excalidraw.com/",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "手绘风白板，画流程图 / 方案草图",
+      "tags": [
+        "画图",
+        "流程图"
+      ],
+      "glyph": "sky",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-019",
+      "name": "JSON 中文工具站",
+      "url": "https://www.json.cn/",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "JSON 校验、格式化、路径树",
+      "tags": [
+        "JSON",
+        "调试"
+      ],
+      "glyph": "sea",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-020",
+      "name": "Regex101",
+      "url": "https://regex101.com/",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "正则表达式实时测试与解释",
+      "tags": [
+        "正则",
+        "调试"
+      ],
+      "glyph": "sea",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-021",
+      "name": "CyberChef",
+      "url": "https://gchq.github.io/CyberChef/",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "Base64 / URL / 哈希 / 加解密瑞士军刀",
+      "tags": [
+        "编码",
+        "加密"
+      ],
+      "glyph": "sea",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-022",
+      "name": "时间戳转换",
+      "url": "https://www.tool.lu/timestamp",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "Unix 时间戳 ↔ 日期互转",
+      "tags": [
+        "时间戳",
+        "调试"
+      ],
+      "glyph": "sky",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-023",
+      "name": "QuickChart",
+      "url": "https://quickchart.io/",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "生成图表图片，贴报告 / 群里发图用",
+      "tags": [
+        "图表"
+      ],
+      "glyph": "sea",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-024",
+      "name": "Can I Use",
+      "url": "https://caniuse.com/",
+      "groupId": "g-tools",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "浏览器特性兼容性查询",
+      "tags": [
+        "前端",
+        "兼容"
+      ],
+      "glyph": "sky",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-025",
+      "name": "语雀",
+      "url": "https://www.yuque.com/",
+      "groupId": "g-docs",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "知识库与需求文档协作",
+      "tags": [
+        "文档",
+        "知识库"
+      ],
+      "glyph": "peach",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-026",
+      "name": "MDN Web Docs",
+      "url": "https://developer.mozilla.org/zh-CN/",
+      "groupId": "g-docs",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "Web 标准权威手册",
+      "tags": [
+        "文档",
+        "前端"
+      ],
+      "glyph": "sea",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-027",
+      "name": "Stack Overflow",
+      "url": "https://stackoverflow.com/",
+      "groupId": "g-docs",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "报错先搜这里，八成有人遇过",
+      "tags": [
+        "问答",
+        "排错"
+      ],
+      "glyph": "peach",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-028",
+      "name": "GitHub",
+      "url": "https://github.com/",
+      "groupId": "g-docs",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "开源仓库与依赖源码查阅",
+      "tags": [
+        "代码托管"
+      ],
+      "glyph": "grape",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-029",
+      "name": "菜鸟教程",
+      "url": "https://www.runoob.com/",
+      "groupId": "g-docs",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "入门语法速查，中文友好",
+      "tags": [
+        "教程"
+      ],
+      "glyph": "mint",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-030",
+      "name": "百度翻译",
+      "url": "https://fanyi.baidu.com/",
+      "groupId": "g-docs",
+      "sectionId": "",
+      "type": "external",
+      "status": "active",
+      "desc": "术语与说明书段落翻译",
+      "tags": [
+        "翻译"
+      ],
+      "glyph": "sky",
+      "intranet": false,
+      "enabled": true,
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-031",
+      "name": "项目任务看板",
+      "url": "http://192.168.1.30:3000",
+      "groupId": "dept-dev",
+      "sectionId": "sec-dev",
+      "type": "internal",
+      "status": "active",
+      "owner": "开发科",
+      "desc": "示例记录：开发科自研任务管理，请修改为真实地址",
+      "tags": [
+        "示例",
+        "管理"
+      ],
+      "glyph": "mint",
+      "intranet": true,
+      "enabled": true,
+      "host": "192.168.1.30",
+      "port": "3000",
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000,
+      "favorite": false
+    },
+    {
+      "id": "seed-032",
+      "name": "接口文档平台",
+      "url": "http://192.168.1.30:8081",
+      "groupId": "dept-dev",
+      "sectionId": "sec-dev",
+      "type": "internal",
+      "status": "active",
+      "owner": "开发科",
+      "desc": "示例记录：Swagger / Apifox 自建服务",
+      "tags": [
+        "示例",
+        "文档"
+      ],
+      "glyph": "sea",
+      "intranet": true,
+      "enabled": true,
+      "host": "192.168.1.30",
+      "port": "8081",
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-033",
+      "name": "代码审查服务",
+      "url": "http://192.168.1.31:8929",
+      "groupId": "dept-dev",
+      "sectionId": "sec-dev",
+      "type": "internal",
+      "status": "active",
+      "owner": "开发科",
+      "desc": "示例记录：Gitea / GitLab 内网实例",
+      "tags": [
+        "示例",
+        "代码"
+      ],
+      "glyph": "sky",
+      "intranet": true,
+      "enabled": true,
+      "host": "192.168.1.31",
+      "port": "8929",
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-034",
+      "name": "选型参数库",
+      "url": "http://192.168.1.40:5000",
+      "groupId": "dept-prod",
+      "sectionId": "sec-prod1",
+      "type": "internal",
+      "status": "active",
+      "owner": "产品研发一科",
+      "desc": "示例记录：水泵选型参数与计算",
+      "tags": [
+        "示例",
+        "产品"
+      ],
+      "glyph": "rose",
+      "intranet": true,
+      "enabled": true,
+      "host": "192.168.1.40",
+      "port": "5000",
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-035",
+      "name": "BOM 清单工具",
+      "url": "http://192.168.1.41:8000",
+      "groupId": "dept-prod",
+      "sectionId": "sec-prod2",
+      "type": "internal",
+      "status": "active",
+      "owner": "产品研发二科",
+      "desc": "示例记录：产品结构清单维护",
+      "tags": [
+        "示例",
+        "BOM"
+      ],
+      "glyph": "peach",
+      "intranet": true,
+      "enabled": true,
+      "host": "192.168.1.41",
+      "port": "8000",
+      "createdAt": 1767225600000,
+      "updatedAt": 1767225600000
+    },
+    {
+      "id": "seed-036",
+      "name": "DrawReview AI Agent",
+      "url": "http://172.16.2.211:8000/",
+      "groupId": "dept-tech",
+      "sectionId": "",
+      "type": "internal",
+      "status": "active",
+      "owner": "工程技术部",
+      "desc": "工程设计图纸审查平台",
+      "tags": [
+        "示例",
+        "试验"
+      ],
+      "glyph": "grape",
+      "intranet": true,
+      "enabled": true,
+      "host": "192.168.1.50",
+      "port": "9000",
+      "createdAt": 1767225600000,
+      "updatedAt": 1789606890993,
+      "favorite": true
+    }
+  ],
+  "favorites": [
+    "seed-007",
+    "seed-005",
+    "seed-004",
+    "seed-036",
+    "seed-002",
+    "seed-010"
+  ],
+  "recent": [],
+  "stats": {}
+}

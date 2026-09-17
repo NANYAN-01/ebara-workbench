@@ -31,8 +31,8 @@ export function ImportDialog({ open, onClose }: { open: boolean; onClose: () => 
         setPending(null);
         return;
       }
-      if (typeof json.version === "number" && json.version > 1) {
-        setError(`配置版本 v${json.version} 高于当前支持的 v1，请先升级工作台`);
+      if (typeof json.version === "number" && json.version > 3) {
+        setError(`配置版本 v${json.version} 高于当前支持的 v3，请先升级工作台`);
         setPending(null);
         return;
       }
