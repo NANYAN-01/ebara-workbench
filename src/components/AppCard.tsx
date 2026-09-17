@@ -1,5 +1,4 @@
 import { useState } from "react";
-import type { DragEvent } from "react";
 import { cn } from "@/lib/utils";
 import { useWorkspace } from "@/lib/layout-context";
 import { useStore } from "@/lib/store";
@@ -8,6 +7,23 @@ import { Chip, StatusDot } from "@/components/Bits";
 import { btn } from "@/components/ui/button-variants";
 import { Copy, ExternalLink, Pencil, Star } from "lucide-react";
 import type { WorkApp } from "@/lib/types";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  rectSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 /** 悬停才浮现的操作按钮（触屏设备常驻，见 styles.css .hover-reveal） */
 function CardActions({ app }: { app: WorkApp }) {
@@ -48,45 +64,52 @@ function CardActions({ app }: { app: WorkApp }) {
   );
 }
 
-// store 与布局动作在文件顶部一次性导入，组件内直接取用
-
-export function AppCard({
+/** 单个可排序的卡片 */
+function SortableAppCard({
   app,
-  dense = false,
-  draggable = false,
-  onDragStart,
-  onDropAt,
+  dense,
   placeOf,
 }: {
   app: WorkApp;
   dense?: boolean;
-  draggable?: boolean;
-  onDragStart?: (id: string, e: DragEvent) => void;
-  onDropAt?: (targetId: string, e: DragEvent) => void;
   placeOf?: (app: WorkApp) => string;
 }) {
-  const [over, setOver] = useState(false);
   const { launch } = useStore();
   const { orgGroups } = useStore();
   const group = orgGroups.find((g) => g.id === app.groupId);
   const section = group?.sections.find((s) => s.id === app.sectionId);
 
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: app.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    zIndex: isDragging ? 50 : undefined,
+  };
+
   return (
     <a
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
       href={app.url}
       target="_blank"
       rel="noreferrer"
       title={app.name}
-      draggable={draggable}
-      onDragStart={(e) => { if (!draggable) return; e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", app.id); onDragStart?.(app.id, e); }}
-      onDragOver={(e) => { if (!onDropAt) return; e.preventDefault(); e.dataTransfer.dropEffect = "move"; setOver(true); }}
-      onDragLeave={() => setOver(false)}
-      onDrop={(e) => { if (!onDropAt) return; e.preventDefault(); setOver(false); onDropAt(app.id, e); }}
       onClick={(e) => { e.preventDefault(); launch(app.id); }}
       className={cn(
         "group relative flex cursor-pointer flex-col rounded-md border bg-card text-left transition-[border-color,background-color] duration-150",
         "hover:border-border hover:bg-surface",
-        over && "border-accent ring-1 ring-accent/25",
+        isDragging && "ring-2 ring-accent/50",
         dense ? "gap-2 p-3" : "gap-2.5 p-4",
       )}
     >
@@ -114,7 +137,59 @@ export function AppCard({
   );
 }
 
-/** 卡片墙：原生 HTML5 拖放四件套齐全，支持跨容器移动与同容器排序 */
+/** 不可排序的普通卡片 */
+function StaticAppCard({
+  app,
+  dense,
+  placeOf,
+}: {
+  app: WorkApp;
+  dense?: boolean;
+  placeOf?: (app: WorkApp) => string;
+}) {
+  const { launch } = useStore();
+  const { orgGroups } = useStore();
+  const group = orgGroups.find((g) => g.id === app.groupId);
+  const section = group?.sections.find((s) => s.id === app.sectionId);
+
+  return (
+    <a
+      href={app.url}
+      target="_blank"
+      rel="noreferrer"
+      title={app.name}
+      onClick={(e) => { e.preventDefault(); launch(app.id); }}
+      className={cn(
+        "group relative flex cursor-pointer flex-col rounded-md border bg-card text-left transition-[border-color,background-color] duration-150",
+        "hover:border-border hover:bg-surface",
+        dense ? "gap-2 p-3" : "gap-2.5 p-4",
+      )}
+    >
+      <div className="flex items-start gap-2.5 pr-16">
+        <AppGlyph name={app.name} url={app.url} appId={app.id} color={app.glyph} size={dense ? "sm" : "md"} />
+        <div className="min-w-0 flex-1 pt-0.5">
+          <p className="truncate-1 text-[13.5px] font-bold leading-snug tracking-tight text-foreground">{app.name}</p>
+          <p className="num mt-0.5 truncate-1 text-[11px] leading-snug text-subtle">{app.url.replace(/^https?:\/\//, "")}</p>
+        </div>
+      </div>
+
+      {!dense && app.desc && (
+        <p className="line-clamp-2 text-[12.5px] leading-relaxed text-muted-foreground">{app.desc}</p>
+      )}
+
+      <div className="mt-auto flex flex-wrap items-center gap-x-2.5 gap-y-1.5 pt-0.5">
+        <StatusDot status={app.status} />
+        {app.intranet && <Chip tone="outline">内网</Chip>}
+        {section && <span className="truncate-1 text-[11.5px] text-subtle">{section.name}</span>}
+        {placeOf && <span className="ml-auto shrink-0 text-[11.5px] text-subtle">{placeOf(app)}</span>}
+      </div>
+
+      <CardActions app={app} />
+    </a>
+  );
+}
+
+/** 卡片墙：使用 @dnd-kit 实现拖拽排序 */
 export function AppGrid({
   apps,
   dense,
@@ -130,29 +205,45 @@ export function AppGrid({
   placeOf?: (app: WorkApp) => string;
   cols?: string;
 }) {
-  const [dragId, setDragId] = useState<string | null>(null);
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const itemIds = apps.map((a) => a.id);
+
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (!over || active.id === over.id || !onReorder) return;
+    onReorder(active.id as string, over.id as string);
+  }
+
+  if (!reorderable || !onReorder) {
+    return (
+      <div className={cn("grid grid-cols-1 gap-3", cols)}>
+        {apps.map((a) => (
+          <StaticAppCard key={a.id} app={a} dense={dense} placeOf={placeOf} />
+        ))}
+      </div>
+    );
+  }
 
   return (
-    <div className={cn("grid grid-cols-1 gap-3", cols)}>
-      {apps.map((a) => (
-        <AppCard
-          key={a.id}
-          app={a}
-          dense={dense}
-          draggable={reorderable}
-          placeOf={placeOf}
-          onDragStart={(id) => setDragId(id)}
-          onDropAt={
-            reorderable && onReorder
-              ? (targetId) => {
-                  if (dragId && dragId !== targetId) onReorder(dragId, targetId);
-                  setDragId(null);
-                }
-              : undefined
-          }
-        />
-      ))}
-    </div>
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <SortableContext items={itemIds} strategy={rectSortingStrategy}>
+        <div className={cn("grid grid-cols-1 gap-3", cols)}>
+          {apps.map((a) => (
+            <SortableAppCard key={a.id} app={a} dense={dense} placeOf={placeOf} />
+          ))}
+        </div>
+      </SortableContext>
+    </DndContext>
   );
 }
 
