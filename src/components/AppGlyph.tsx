@@ -37,7 +37,7 @@ export function AppGlyph({
 
   // 手动上传的 logo 优先于自动抓取
   const override = readAvatarOverride(appId);
-  const candidates = override ? [override] : url ? logoCandidates(url) : [];
+  const candidates = override ? [override] : url ? logoCandidates(url, name) : [];
   const [idx, setIdx] = useState(0);
   const [loaded, setLoaded] = useState(false);
 

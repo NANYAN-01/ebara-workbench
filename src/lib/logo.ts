@@ -14,8 +14,26 @@ export function hostOf(url: string): string | null {
   }
 }
 
+/** 本地/内置图标映射：应用名称 → 本地图片路径 */
+const LOCAL_LOGOS: Record<string, string> = {
+  "U9 管理系统": "/U9.png",
+  "OA 办公系统": "/OA.png",
+  "通义千问": "https://img.alicdn.com/imgextra/i1/O1CN01AKUdpI1sSUmCUWBmI_!!6000000005767-2-tps-124-120.png",
+  "DeepSeek": "https://www.deepseek.com/favicon.ico",
+};
+
+/** 获取本地/内置图标 */
+export function getLocalLogo(appName?: string): string | null {
+  if (!appName) return null;
+  return LOCAL_LOGOS[appName] ?? null;
+}
+
 /** 候选 logo 地址（按顺序尝试）；内网/无域名应用返回空数组 */
-export function logoCandidates(url: string): string[] {
+export function logoCandidates(url: string, appName?: string): string[] {
+  // 优先检查本地图标
+  const localLogo = getLocalLogo(appName);
+  if (localLogo) return [localLogo];
+
   const host = hostOf(url);
   if (!host) return [];
   const root = host.split(".").slice(-2).join(".");
