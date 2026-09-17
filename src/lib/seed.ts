@@ -526,17 +526,17 @@ export const SEED_APPS: WorkApp[] = [
     owner: "产品研发二科",
   }),
   build({
-    name: "试验数据平台",
+    name: "DrawReview AI Agent V12",
     groupId: "dept-tech",
-    sectionId: "sec-eng",
+    sectionId: "",
     type: "internal",
     glyph: "试",
     tone: "grape",
-    host: "192.168.1.50",
-    port: "9000",
-    note: "示例记录：性能试验数据采集与曲线",
+    host: "172.16.2.211",
+    port: "8000",
+    note: "工程设计图纸审查平台",
     tags: ["示例", "试验"],
-    owner: "工程技术研发科",
+    owner: "工程技术部",
   }),
   build({
     name: "电气图纸归档",
@@ -554,5 +554,5 @@ export const SEED_APPS: WorkApp[] = [
 ];
 
 export const DEFAULT_FAVORITES: string[] = SEED_APPS.filter((a) =>
-  ["U9 管理系统", "OA 办公系统", "iLovePDF", "通义千问"].includes(a.name),
+  ["豆包", "DeepSeek", "DrawReview AI Agent V12", "iLovePDF"].includes(a.name),
 ).map((a) => a.id);

@@ -99,7 +99,8 @@
       "host": "192.168.1.6",
       "path": "/erp/mvc/login/index",
       "createdAt": 1767225600000,
-      "updatedAt": 1789606551624
+      "updatedAt": 1789606551624,
+      "favorite": false
     },
     {
       "id": "seed-002",
@@ -120,7 +121,8 @@
       "enabled": true,
       "host": "192.168.1.18",
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-003",
@@ -141,7 +143,8 @@
       "host": "192.168.1.18",
       "path": "/mail/",
       "createdAt": 1767225600000,
-      "updatedAt": 1789606689640
+      "updatedAt": 1789606689640,
+      "favorite": false
     },
     {
       "id": "seed-004",
@@ -182,7 +185,7 @@
       "enabled": true,
       "createdAt": 1767225600000,
       "updatedAt": 1789606983472,
-      "favorite": true
+      "favorite": false
     },
     {
       "id": "seed-006",
@@ -242,7 +245,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-009",
@@ -260,7 +264,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-010",
@@ -279,7 +284,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": true
     },
     {
       "id": "seed-011",
@@ -298,7 +304,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-012",
@@ -316,7 +323,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-013",
@@ -335,7 +343,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-014",
@@ -354,7 +363,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-015",
@@ -372,7 +382,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-016",
@@ -391,7 +402,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-017",
@@ -410,7 +422,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-018",
@@ -429,7 +442,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-019",
@@ -448,7 +462,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-020",
@@ -467,7 +482,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-021",
@@ -486,7 +502,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-022",
@@ -505,7 +522,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-023",
@@ -523,7 +541,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-024",
@@ -542,7 +561,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-025",
@@ -561,7 +581,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-026",
@@ -580,7 +601,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-027",
@@ -599,7 +621,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-028",
@@ -617,7 +640,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-029",
@@ -635,7 +659,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-030",
@@ -653,7 +678,8 @@
       "intranet": false,
       "enabled": true,
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-031",
@@ -698,7 +724,8 @@
       "host": "192.168.1.30",
       "port": "8081",
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-033",
@@ -720,7 +747,8 @@
       "host": "192.168.1.31",
       "port": "8929",
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-034",
@@ -742,7 +770,8 @@
       "host": "192.168.1.40",
       "port": "5000",
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-035",
@@ -764,11 +793,12 @@
       "host": "192.168.1.41",
       "port": "8000",
       "createdAt": 1767225600000,
-      "updatedAt": 1767225600000
+      "updatedAt": 1767225600000,
+      "favorite": false
     },
     {
       "id": "seed-036",
-      "name": "DrawReview AI Agent",
+      "name": "DrawReview AI Agent V12",
       "url": "http://172.16.2.211:8000/",
       "groupId": "dept-tech",
       "sectionId": "",
@@ -786,18 +816,30 @@
       "host": "192.168.1.50",
       "port": "9000",
       "createdAt": 1767225600000,
-      "updatedAt": 1789606890993,
+      "updatedAt": 1789609729805,
       "favorite": true
     }
   ],
   "favorites": [
-    "seed-007",
-    "seed-005",
     "seed-004",
+    "seed-007",
     "seed-036",
-    "seed-002",
     "seed-010"
   ],
-  "recent": [],
-  "stats": {}
+  "recent": [
+    {
+      "id": "seed-002",
+      "at": 1789609312581
+    }
+  ],
+  "stats": {
+    "seed-002": {
+      "days": {
+        "2026-09-17": {
+          "count": 1,
+          "lastAt": 1789609312581
+        }
+      }
+    }
+  }
 }

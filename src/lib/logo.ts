@@ -20,6 +20,7 @@ const LOCAL_LOGOS: Record<string, string> = {
   "OA 办公系统": "/OA.png",
   "通义千问": "https://img.alicdn.com/imgextra/i1/O1CN01AKUdpI1sSUmCUWBmI_!!6000000005767-2-tps-124-120.png",
   "DeepSeek": "https://www.deepseek.com/favicon.ico",
+  "DrawReview AI Agent V12": "https://img.icons8.com/fluency/96/ai.png",
 };
 
 /** 获取本地/内置图标 */
